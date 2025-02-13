@@ -22,6 +22,6 @@ jobs:
         run: |
           git switch -c test-branch
           git reset --hard 2ad27dd907c312f1614a2850804b765d333d26c0
-          git push origin test-branch
+          git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git test-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
