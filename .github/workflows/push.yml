@@ -20,14 +20,7 @@ jobs:
 
       - name: Create branch
         run: |
-          git switch -c test-branch
-
-      - name: Create a content
-        run: |
-          echo "Hello, World!" > hello.txt
-          git add hello.txt
-          git commit -m "Add hello.txt"
-
-      - name: Push branch
-        run: |
+          git switch -c test-branch 2ad27dd907c312f1614a2850804b765d333d26c0
           git push origin test-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
