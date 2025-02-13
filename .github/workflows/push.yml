@@ -1,0 +1,33 @@
+name: Test Push
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create branch
+        run: |
+          git switch -c test-branch
+
+      - name: Create a content
+        run: |
+          echo "Hello, World!" > hello.txt
+          git add hello.txt
+          git commit -m "Add hello.txt"
+
+      - name: Push branch
+        run: |
+          git push origin test-branch
