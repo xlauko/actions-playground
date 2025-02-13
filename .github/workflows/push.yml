@@ -21,6 +21,6 @@ jobs:
 
       - name: Create branch
         run: |
+          git checkout 2ad27dd907c312f1614a2850804b765d333d26c0
           git switch -c test-branch
-          git reset --hard 2ad27dd907c312f1614a2850804b765d333d26c0
           git push origin test-branch
