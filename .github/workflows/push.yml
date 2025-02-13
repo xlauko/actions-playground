@@ -19,9 +19,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Create branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
-          git switch -c test-branch
-          git reset --hard 2ad27dd907c312f1614a2850804b765d333d26c0
+          git switch -c test-branch 2ad27dd907c312f1614a2850804b765d333d26c0
           git push --force origin test-branch
