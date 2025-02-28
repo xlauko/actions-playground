@@ -1,0 +1,33 @@
+name: Tests
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      repo_ref:
+        required: false
+        type: string
+      expected_repo_ref:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.repo_ref || github.ref }}
+
+      - name: Test Repo Ref
+        run: |
+          echo "Test input repo ref ${{ inputs.repo_ref }}"
+          echo "Checkout ref ${{ inputs.repo_ref || github.ref }}"
+          echo "Expected ref ${{ inputs.expected_repo_ref }}"
+          if [ "${{ inputs.repo_ref || github.ref }}" != "${{ inputs.expected_repo_ref }}" ]; then
+            echo "Expected refs do not match"
+            exit 1
+          fi

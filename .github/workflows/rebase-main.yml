@@ -1,0 +1,22 @@
+name: Test Rebase Main
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  rebase:
+    name: Rebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+  test:
+    name: Test
+    needs: rebase
+    uses: ./.github/workflows/test-rebase-main.yml
+    with:
+        expected_repo_ref: test
